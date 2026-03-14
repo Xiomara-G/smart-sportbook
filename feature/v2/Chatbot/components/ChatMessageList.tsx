@@ -7,12 +7,10 @@ import { ChatbotLocalization } from '../localization/Core/ChatbotLocalization';
 
 interface ChatMessageListProps {
   messages: Message[];
-  isLoading?: boolean;
 }
 
 export const ChatMessageList = memo(function ChatMessageList({
   messages,
-  isLoading,
 }: ChatMessageListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 

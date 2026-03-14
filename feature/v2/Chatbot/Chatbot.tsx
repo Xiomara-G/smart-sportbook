@@ -14,7 +14,23 @@ import { ThemeToggle } from './components/ThemeToggle';
 const INITIAL_GREETING = "¡Hola! Soy Lucky, tu asistente de soporte. Estoy aquí para ayudarte. ¿En qué puedo asistirte hoy?";
 const STORAGE_KEY = 'chat_messages';
 
-export default function Chatbot() {
+interface ChatbotProps {
+  isEmbedded?: boolean;
+}
+
+const updateLastMessage = (
+  messages: Message[],
+  messagePatch: Partial<Message>
+): Message[] => {
+  return messages.map((message, index) => {
+    if (index !== messages.length - 1) {
+      return message;
+    }
+    return { ...message, ...messagePatch };
+  });
+};
+
+export default function Chatbot({ isEmbedded = false }: Readonly<ChatbotProps>) {
   const [state, setState] = useState<ChatState>({
     messages: [],
     inputValue: '',
@@ -79,11 +95,7 @@ export default function Chatbot() {
         (chunk) => {
           setState((prev) => ({
             ...prev,
-            messages: prev.messages.map((msg, idx) =>
-              idx === prev.messages.length - 1
-                ? { ...msg, content: chunk }
-                : msg
-            ),
+            messages: updateLastMessage(prev.messages, { content: chunk }),
           }));
         }
       );
@@ -91,21 +103,17 @@ export default function Chatbot() {
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        messages: prev.messages.map((msg, idx) =>
-          idx === prev.messages.length - 1
-            ? { ...msg, isStreaming: false }
-            : msg
-        ),
+        messages: updateLastMessage(prev.messages, { isStreaming: false }),
       }));
     } catch {
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        messages: prev.messages.map((msg, idx) =>
-          idx === prev.messages.length - 1
-            ? { ...msg, isStreaming: false, content: 'Lo siento, estoy teniendo problemas técnicos en este momento. Por favor, intenta nuevamente en unos momentos o contacta a soporte directamente.' }
-            : msg
-        ),
+        messages: updateLastMessage(prev.messages, {
+          isStreaming: false,
+          content:
+            'Lo siento, estoy teniendo problemas tecnicos en este momento. Por favor, intenta nuevamente en unos momentos o contacta a soporte directamente.',
+        }),
         error: 'Failed to send message',
       }));
     }
@@ -129,17 +137,23 @@ export default function Chatbot() {
   );
 
   return (
-    <div className="relative flex h-screen flex-col bg-gray-50 dark:bg-gray-950">
+    <div
+      className={`relative flex flex-col bg-gray-50 dark:bg-gray-950 ${
+        isEmbedded ? 'h-full' : 'h-screen'
+      }`}
+    >
       <ChatHeader onNewChat={handleNewChat} />
-      <ChatMessageList messages={state.messages} isLoading={state.isLoading} />
+      <ChatMessageList messages={state.messages} />
       <ChatSuggestions
         onSuggestionClick={handleSuggestionClick}
         hasMessages={state.messages.length > 0}
       />
       <ChatInput onSendMessage={handleSendMessage} isLoading={state.isLoading} />
-      <div className="absolute bottom-4 right-4 z-10">
-        <ThemeToggle />
-      </div>
+      {!isEmbedded && (
+        <div className="absolute bottom-4 right-4 z-10">
+          <ThemeToggle />
+        </div>
+      )}
     </div>
   );
 }

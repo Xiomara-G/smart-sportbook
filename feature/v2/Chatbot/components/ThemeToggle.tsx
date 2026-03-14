@@ -1,23 +1,18 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 interface ThemeToggleProps {
   className?: string;
 }
 
 export function ThemeToggle({ className = '' }: ThemeToggleProps) {
-  const [isDark, setIsDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const dark = stored === 'dark' || (!stored && prefersDark);
-    setIsDark(dark);
-    document.documentElement.classList.toggle('dark', dark);
-  }, []);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof document === 'undefined') {
+      return false;
+    }
+    return document.documentElement.classList.contains('dark');
+  });
 
   const toggle = () => {
     const newValue = !isDark;
@@ -25,8 +20,6 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
     document.documentElement.classList.toggle('dark', newValue);
     localStorage.setItem('theme', newValue ? 'dark' : 'light');
   };
-
-  if (!mounted) return null;
 
   return (
     <button
