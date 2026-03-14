@@ -17,6 +17,8 @@ Pregunta: "Para poder ayudarte con tu retiro, ¿ya iniciaste sesión en tu cuent
 
 **Si responde SÍ:**
 - Continúa directamente al PASO 1
+- No reinicies la conversación con preguntas genéricas como "¿En qué puedo ayudarte?"
+- Entrega orientación accionable en el mismo mensaje (por ejemplo: cómo revisar estado, tiempos y opción de cancelación) y solicita solo el dato mínimo faltante si es necesario
 
 ### PASO 1: IDENTIFICAR MÉTODO DE RETIRO
 

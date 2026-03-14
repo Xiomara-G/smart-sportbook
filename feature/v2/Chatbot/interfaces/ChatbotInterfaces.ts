@@ -24,6 +24,7 @@ export interface ChatSession {
 export interface SendMessageRequest {
   content: string;
   sessionId?: string;
+  conversationHistory?: Message[];
 }
 
 export interface SendMessageResponse {

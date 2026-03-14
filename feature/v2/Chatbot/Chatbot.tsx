@@ -54,8 +54,14 @@ export default function Chatbot() {
   }, [state.messages]);
 
   const handleSendMessage = useCallback(async (content: string) => {
-    const userMessage = createUserMessage(content);
+    const trimmedContent = content.trim();
+    if (!trimmedContent) {
+      return;
+    }
+
+    const userMessage = createUserMessage(trimmedContent);
     const streamingMessage = createAssistantMessage('', true);
+    const conversationHistory = state.messages.filter((message) => !message.isStreaming);
 
     setState((prev) => ({
       ...prev,
@@ -65,17 +71,22 @@ export default function Chatbot() {
     }));
 
     try {
-      const conversationHistory = state.messages.slice(-20);
-      await sendMessage({ content }, conversationHistory, (chunk) => {
-        setState((prev) => ({
-          ...prev,
-          messages: prev.messages.map((msg, idx) =>
-            idx === prev.messages.length - 1
-              ? { ...msg, content: chunk }
-              : msg
-          ),
-        }));
-      });
+      await sendMessage(
+        {
+          content: trimmedContent,
+          conversationHistory,
+        },
+        (chunk) => {
+          setState((prev) => ({
+            ...prev,
+            messages: prev.messages.map((msg, idx) =>
+              idx === prev.messages.length - 1
+                ? { ...msg, content: chunk }
+                : msg
+            ),
+          }));
+        }
+      );
 
       setState((prev) => ({
         ...prev,
@@ -86,7 +97,7 @@ export default function Chatbot() {
             : msg
         ),
       }));
-    } catch (error) {
+    } catch {
       setState((prev) => ({
         ...prev,
         isLoading: false,

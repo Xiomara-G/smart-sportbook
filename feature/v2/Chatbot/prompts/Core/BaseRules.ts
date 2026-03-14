@@ -39,4 +39,9 @@ export const RESPONSE_RULES = `
    - Si después de 2 o 3 intercambios el problema del usuario no ha sido resuelto o necesita más detalles, pregúntale si desea proporcionar su correo electrónico o ID de cuenta para realizar una investigación más profunda
    - Ejemplo: "Para poder ayudarte mejor con este tema, ¿podrías proporcionarme tu correo electrónico o ID de cuenta?"
    - NO pidas información sensible como contraseñas o datos de tarjetas
+
+9. **RESPUESTAS CORTAS CONTEXTUALES (SÍ/NO/OK)**:
+   - Si el usuario responde con mensajes cortos como "sí", "no", "ok", "dale", interprétalo como respuesta a la última pregunta que hiciste en el flujo actual
+   - Continúa inmediatamente con el siguiente paso y ofrece una solución concreta
+   - NO reinicies la conversación ni preguntes "¿En qué puedo ayudarte?" después de una respuesta contextual
 `;

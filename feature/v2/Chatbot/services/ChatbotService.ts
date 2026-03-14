@@ -3,7 +3,7 @@ import { Message, SendMessageRequest, SendMessageResponse } from '../interfaces/
 const API_BASE_URL = '/api/chat';
 
 export const sendMessage = async (
-request: SendMessageRequest, conversationHistory?: Message[], onChunk?: (content: string) => void): Promise<SendMessageResponse> => {
+request: SendMessageRequest, onChunk?: (content: string) => void): Promise<SendMessageResponse> => {
   try {
     const response = await fetch(API_BASE_URL, {
       method: 'POST',
@@ -12,6 +12,7 @@ request: SendMessageRequest, conversationHistory?: Message[], onChunk?: (content
       },
       body: JSON.stringify({
         content: request.content,
+        conversationHistory: request.conversationHistory || [],
       }),
     });
 
@@ -54,7 +55,7 @@ request: SendMessageRequest, conversationHistory?: Message[], onChunk?: (content
     }
 
     const message: Message = {
-      id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`,
       role: 'assistant',
       content: fullContent,
       timestamp: new Date(),
@@ -68,7 +69,7 @@ request: SendMessageRequest, conversationHistory?: Message[], onChunk?: (content
     console.error('Error calling chat API:', error);
 
     const errorMessage: Message = {
-      id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`,
       role: 'assistant',
       content: 'Lo siento, estoy teniendo problemas técnicos en este momento. Por favor, intenta nuevamente en unos momentos o contacta a soporte directamente.',
       timestamp: new Date(),
@@ -82,5 +83,5 @@ request: SendMessageRequest, conversationHistory?: Message[], onChunk?: (content
 };
 
 export const generateId = (): string => {
-  return `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  return `msg_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
 };
