@@ -38,7 +38,8 @@ export default function Chatbot() {
     }));
 
     try {
-      const response = await sendMessage({ content });
+      const conversationHistory = state.messages.slice(-20);
+      const response = await sendMessage({ content }, conversationHistory);
 
       setState((prev) => ({
         ...prev,
@@ -52,7 +53,7 @@ export default function Chatbot() {
         error: 'Failed to send message',
       }));
     }
-  }, []);
+  }, [state.messages]);
 
   const handleNewChat = useCallback(() => {
     setState({
