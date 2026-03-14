@@ -55,7 +55,6 @@ export default function Sportsbook() {
           <SportsbookHeaderBanners
             title={SportsbookLocalization.pageTitle}
             description={SportsbookLocalization.pageDescription}
-            banners={SportsbookLocalization.banners}
           />
           <SportsbookMatchList
             events={SportsbookLocalization.events}
