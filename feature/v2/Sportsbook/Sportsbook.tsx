@@ -6,6 +6,7 @@ import { SportsbookMatchList } from './components/SportsbookMatchList';
 import { SportsbookBetCounter } from './components/SportsbookBetCounter';
 import { SportsbookChatDrawer } from './components/SportsbookChatDrawer';
 import { SportsbookBetslip } from './components/SportsbookBetslip';
+import { SportsbookRecommendations } from './components/SportsbookRecommendations';
 import { SportsbookLocalization } from './localization/Core/SportsbookLocalization';
 
 export interface Bet {
@@ -19,11 +20,16 @@ export interface Bet {
 
 export default function Sportsbook() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isRecommendationsOpen, setIsRecommendationsOpen] = useState(false);
   const [isBetslipExpanded, setIsBetslipExpanded] = useState(false);
   const [bets, setBets] = useState<Bet[]>([]);
 
   const handleToggleChat = useCallback(() => {
     setIsChatOpen((prev) => !prev);
+  }, []);
+
+  const handleToggleRecommendations = useCallback(() => {
+    setIsRecommendationsOpen((prev) => !prev);
   }, []);
 
   const handleAddBet = useCallback((bet: Bet) => {
@@ -92,6 +98,14 @@ export default function Sportsbook() {
         isOpen={isChatOpen}
         closeLabel={SportsbookLocalization.closeChatLabel}
         onToggle={handleToggleChat}
+      />
+
+      <SportsbookRecommendations
+        recommendations={SportsbookLocalization.recommendations}
+        weeklyRecommendations={SportsbookLocalization.weeklyRecommendations}
+        isOpen={isRecommendationsOpen}
+        onToggle={handleToggleRecommendations}
+        onAddBet={handleAddBet}
       />
     </div>
   );

@@ -24,8 +24,8 @@ export const SportsbookHeaderBanners = memo(function SportsbookHeaderBanners() {
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold text-white">Top Live Events</h3>
           <div className="flex gap-2">
-            <button className="h-8 w-8 rounded-lg bg-[#1a1a1a] text-xs">{'<'}</button>
-            <button className="h-8 w-8 rounded-lg bg-[#1a1a1a] text-xs">{'>'}</button>
+            <button className="cursor-pointer h-8 w-8 rounded-lg bg-[#1a1a1a] text-xs">{'<'}</button>
+            <button className="cursor-pointer h-8 w-8 rounded-lg bg-[#1a1a1a] text-xs">{'>'}</button>
           </div>
         </div>
       </div>

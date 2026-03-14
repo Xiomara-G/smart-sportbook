@@ -40,14 +40,14 @@ export const SportsbookMatchList = memo(function SportsbookMatchList({
                   <div className="flex gap-1 md:gap-2">
                     <button
                       onClick={() => handleAddBet(event, event.marketOptions[0])}
-                      className="rounded bg-[#81C00A] px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold text-black hover:bg-[#9ad00b] transition"
+                      className="cursor-pointer rounded bg-[#81C00A] px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold text-black hover:bg-[#9ad00b] transition"
                     >
                       {event.marketOptions[0]?.odds || '2.31'}
                     </button>
                     <span className="text-[10px] md:text-xs font-bold text-gray-400 self-center">VS</span>
                     <button
                       onClick={() => handleAddBet(event, event.marketOptions[2] || event.marketOptions[0])}
-                      className="rounded bg-[#81C00A] px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold text-black hover:bg-[#9ad00b] transition"
+                      className="cursor-pointer rounded bg-[#81C00A] px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold text-black hover:bg-[#9ad00b] transition"
                     >
                       {event.marketOptions[2]?.odds || '2.31'}
                     </button>
@@ -59,7 +59,7 @@ export const SportsbookMatchList = memo(function SportsbookMatchList({
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-4">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {events.map((event) => (
             <article
               key={event.id}
@@ -83,7 +83,7 @@ export const SportsbookMatchList = memo(function SportsbookMatchList({
                   {event.marketOptions.map((option) => (
                     <button
                       key={`${event.id}-${option.id}`}
-                      className="flex flex-col items-center justify-center rounded-xl border border-[#1a1a1a] bg-[#121212] px-3 py-2 min-w-[50px] md:min-w-[60px] transition hover:border-[#81C00A] hover:bg-[#1a1a1a]"
+                      className="cursor-pointer flex flex-col items-center justify-center rounded-xl border border-[#1a1a1a] bg-[#121212] px-3 py-2 min-w-[50px] md:min-w-[60px] transition hover:border-[#81C00A] hover:bg-[#1a1a1a]"
                       onClick={() => handleAddBet(event, option)}
                       type="button"
                     >
@@ -92,7 +92,7 @@ export const SportsbookMatchList = memo(function SportsbookMatchList({
                     </button>
                   ))}
                   <button
-                    className="rounded-xl border border-[#81C00A] bg-[#81C00A] px-4 py-2 text-xs font-bold text-black transition hover:bg-[#9ad00b]"
+                    className="cursor-pointer rounded-xl border border-[#81C00A] bg-[#81C00A] px-4 py-2 text-xs font-bold text-black transition hover:bg-[#9ad00b]"
                     onClick={() => handleAddBet(event, event.marketOptions[0])}
                     type="button"
                   >

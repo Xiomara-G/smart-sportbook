@@ -16,7 +16,7 @@ export const ChatHeader = memo(function ChatHeader({ onNewChat }: ChatHeaderProp
         <div className="mx-auto flex max-w-3xl items-center justify-end gap-2">
           <button
             onClick={() => setShowHelp(true)}
-            className="flex items-center gap-2 rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-200 transition-all hover:bg-gray-700"
+            className="cursor-pointer flex items-center gap-2 rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-200 transition-all hover:bg-gray-700"
             aria-label="Ayuda"
           >
             <svg
@@ -37,7 +37,7 @@ export const ChatHeader = memo(function ChatHeader({ onNewChat }: ChatHeaderProp
           </button>
           <button
             onClick={onNewChat}
-            className="flex items-center gap-2 rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-200 transition-all hover:bg-gray-700"
+            className="cursor-pointer flex items-center gap-2 rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-200 transition-all hover:bg-gray-700"
           >
             <svg
               className="h-4 w-4"
@@ -73,7 +73,7 @@ export const ChatHeader = memo(function ChatHeader({ onNewChat }: ChatHeaderProp
               </h2>
               <button
                 onClick={() => setShowHelp(false)}
-                className="text-gray-400 hover:text-gray-200"
+                className="cursor-pointer text-gray-400 hover:text-gray-200"
                 aria-label="Cerrar"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

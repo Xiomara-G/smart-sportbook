@@ -17,7 +17,7 @@ export const SportsbookChatDrawer = memo(function SportsbookChatDrawer({
   return (
     <>
       <button
-        className="animate-glow-pulse fixed right-4 top-1/2 z-40 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-linear-to-br from-[#81C00A] to-[#3B6C01] text-white transition-all duration-300"
+        className="animate-glow-pulse fixed right-4 top-[60%] z-40 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-linear-to-br from-[#81C00A] to-[#3B6C01] text-white transition-all duration-300"
         onClick={onToggle}
         type="button"
         aria-label={isOpen ? closeLabel : 'Abrir asistente'}
@@ -48,7 +48,7 @@ export const SportsbookChatDrawer = memo(function SportsbookChatDrawer({
       {isOpen && (
         <button
           type="button"
-          className="fixed inset-0 z-20 bg-black/40"
+          className="fixed inset-0 z-20 cursor-pointer bg-black/40"
           onClick={onToggle}
           aria-label={closeLabel}
         />
