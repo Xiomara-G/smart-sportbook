@@ -26,10 +26,24 @@ export default function Sportsbook() {
 
   const handleToggleChat = useCallback(() => {
     setIsChatOpen((prev) => !prev);
-  }, []);
+    if (!isChatOpen) {
+      setIsRecommendationsOpen(false);
+    }
+  }, [isChatOpen]);
 
   const handleToggleRecommendations = useCallback(() => {
     setIsRecommendationsOpen((prev) => !prev);
+    if (!isRecommendationsOpen) {
+      setIsChatOpen(false);
+    }
+  }, [isRecommendationsOpen]);
+
+  const handleCloseChat = useCallback(() => {
+    setIsChatOpen(false);
+  }, []);
+
+  const handleCloseRecommendations = useCallback(() => {
+    setIsRecommendationsOpen(false);
   }, []);
 
   const handleAddBet = useCallback((bet: Bet) => {
@@ -96,8 +110,8 @@ export default function Sportsbook() {
 
       <SportsbookChatDrawer
         isOpen={isChatOpen}
-        closeLabel={SportsbookLocalization.closeChatLabel}
         onToggle={handleToggleChat}
+        onClose={handleCloseChat}
       />
 
       <SportsbookRecommendations

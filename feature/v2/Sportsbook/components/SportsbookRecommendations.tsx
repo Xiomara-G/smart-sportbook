@@ -38,44 +38,23 @@ const RiskBadge = ({ risk }: { risk: Recommendation['riskLevel'] }) => {
   );
 };
 
-const FadeInItem = ({ children, key_ }: { children: React.ReactNode; key_: string }) => {
+interface RecommendationItemProps {
+  rec: Recommendation;
+  onQuickBet: (rec: Recommendation) => void;
+}
+
+const RecommendationItem = memo(function RecommendationItem({ rec, onQuickBet }: RecommendationItemProps) {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     setVisible(true);
   }, []);
+
   return (
     <div
-      key={key_}
       className={`rounded-xl border border-[#1a1a1a] bg-[#121212] p-4 transition-all duration-300 ease-out ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
       }`}
     >
-      {children}
-    </div>
-  );
-};
-
-export const SportsbookRecommendations = memo(function SportsbookRecommendations({
-  recommendations,
-  weeklyRecommendations = [],
-  isOpen,
-  onToggle,
-  onAddBet,
-}: SportsbookRecommendationsProps) {
-  const handleQuickBet = (rec: Recommendation) => {
-    const bet: Bet = {
-      id: rec.id,
-      eventId: rec.eventId,
-      homeTeam: rec.homeTeam,
-      awayTeam: rec.awayTeam,
-      selection: rec.selection,
-      odds: rec.odds,
-    };
-    onAddBet(bet);
-  };
-
-  const renderRecommendationItem = (rec: Recommendation) => (
-    <FadeInItem key_={rec.id}>
       <div className="flex flex-col gap-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -100,14 +79,34 @@ export const SportsbookRecommendations = memo(function SportsbookRecommendations
         <p className="text-xs text-gray-500">{rec.reasoning}</p>
 
         <button
-          onClick={() => handleQuickBet(rec)}
+          onClick={() => onQuickBet(rec)}
           className="w-full cursor-pointer rounded-xl bg-[#81C00A] py-2.5 text-sm font-bold text-black transition hover:bg-[#9ad00b]"
         >
           Apostar
         </button>
       </div>
-    </FadeInItem>
+    </div>
   );
+});
+
+export const SportsbookRecommendations = memo(function SportsbookRecommendations({
+  recommendations,
+  weeklyRecommendations = [],
+  isOpen,
+  onToggle,
+  onAddBet,
+}: SportsbookRecommendationsProps) {
+  const handleQuickBet = (rec: Recommendation) => {
+    const bet: Bet = {
+      id: rec.id,
+      eventId: rec.eventId,
+      homeTeam: rec.homeTeam,
+      awayTeam: rec.awayTeam,
+      selection: rec.selection,
+      odds: rec.odds,
+    };
+    onAddBet(bet);
+  };
 
   const hasRecommendations = recommendations.length > 0 || weeklyRecommendations.length > 0;
 
@@ -173,7 +172,9 @@ export const SportsbookRecommendations = memo(function SportsbookRecommendations
                       Basado en tus preferencias, te recomendamos estas apuestas para hoy
                     </p>
                     <div className="space-y-3">
-                      {recommendations.map(renderRecommendationItem)}
+                      {recommendations.map((rec) => (
+                        <RecommendationItem key={rec.id} rec={rec} onQuickBet={handleQuickBet} />
+                      ))}
                     </div>
                   </section>
                 )}
@@ -184,7 +185,9 @@ export const SportsbookRecommendations = memo(function SportsbookRecommendations
                       Recomendaciones de la semana
                     </h3>
                     <div className="space-y-3">
-                      {weeklyRecommendations.map(renderRecommendationItem)}
+                      {weeklyRecommendations.map((rec) => (
+                        <RecommendationItem key={rec.id} rec={rec} onQuickBet={handleQuickBet} />
+                      ))}
                     </div>
                   </section>
                 )}
