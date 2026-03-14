@@ -25,8 +25,8 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
         <div
           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium ${
             isUser
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200'
+              ? 'bg-[#81C00A] text-gray-900'
+              : 'bg-gray-700 text-gray-200'
           }`}
         >
           {isUser ? 'U' : 'AI'}
@@ -37,8 +37,8 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
           <div
             className={`rounded-2xl px-4 py-3 ${
               isUser
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100'
+                ? 'bg-[#81C00A] text-gray-900'
+                : 'bg-gray-800 text-gray-100'
             }`}
           >
             {isUser ? (
@@ -58,7 +58,7 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
                     h2: ({ children }) => <h2 className="mb-2 text-lg font-bold">{children}</h2>,
                     h3: ({ children }) => <h3 className="mb-1 font-semibold">{children}</h3>,
                     hr: () => <hr className="my-3 border-gray-300" />,
-                    code: ({ children }) => <code className="rounded bg-gray-200 px-1 py-0.5 text-xs dark:bg-gray-700">{children}</code>,
+                    code: ({ children }) => <code className="rounded bg-gray-700 px-1 py-0.5 text-xs">{children}</code>,
                   }}
                 >
                   {message.content}
@@ -67,7 +67,7 @@ export const ChatMessage = memo(function ChatMessage({ message }: ChatMessagePro
             )}
           </div>
           <time
-            className="mt-1 text-xs text-gray-500 dark:text-gray-400"
+            className="mt-1 text-xs text-gray-400"
             dateTime={message.timestamp.toISOString()}
           >
             {formatMessageTime(message.timestamp)}

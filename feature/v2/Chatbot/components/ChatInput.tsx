@@ -52,11 +52,11 @@ export const ChatInput = memo(function ChatInput({
 
   return (
     <section
-      className="border-t border-gray-200 bg-white px-4 py-4 dark:border-gray-800 dark:bg-gray-900"
+      className="border-t border-gray-800 bg-gray-900 px-4 py-4"
       aria-label="Message input"
     >
       <div className="mx-auto max-w-3xl">
-        <div className="relative flex items-end gap-2 rounded-2xl border border-gray-300 bg-white p-2 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div className="relative flex items-end gap-2 rounded-2xl border border-gray-700 bg-gray-800 p-2 shadow-sm">
           <textarea
             ref={textareaRef}
             value={inputValue}
@@ -65,14 +65,14 @@ export const ChatInput = memo(function ChatInput({
             placeholder={ChatbotLocalization.inputPlaceholder}
             disabled={isLoading}
             rows={1}
-            className="max-h-[200px] min-h-[44px] w-full resize-none rounded-xl bg-transparent px-3 py-3 text-sm text-gray-900 placeholder-gray-500 outline-none disabled:opacity-50 dark:text-gray-100 dark:placeholder-gray-400"
+            className="max-h-[200px] min-h-[44px] w-full resize-none rounded-xl bg-transparent px-3 py-3 text-sm text-gray-100 placeholder-gray-400 outline-none disabled:opacity-50"
             aria-label="Message input field"
           />
           <button
             onClick={handleSend}
             disabled={isLoading || !inputValue.trim()}
             aria-label={ChatbotLocalization.sendButtonAriaLabel}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#81C00A] text-gray-900 transition-all hover:bg-[#6da308] disabled:cursor-not-allowed disabled:opacity-50"
           >
             <svg
               className="h-5 w-5 rotate-90"
@@ -90,7 +90,7 @@ export const ChatInput = memo(function ChatInput({
             </svg>
           </button>
         </div>
-        <p className="mt-2 text-center text-xs text-gray-500 dark:text-gray-400">
+        <p className="mt-2 text-center text-xs text-gray-400">
           {ChatbotLocalization.helperText}
         </p>
       </div>

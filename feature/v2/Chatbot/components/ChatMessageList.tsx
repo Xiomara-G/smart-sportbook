@@ -29,10 +29,23 @@ export const ChatMessageList = memo(function ChatMessageList({
         aria-label="Empty chat state"
       >
         <div className="text-center">
-          <h2 className="mb-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
-            {ChatbotLocalization.title}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-[#81C00A] to-[#3B6C01] mx-auto">
+            <svg
+              className="h-8 w-8 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
+          </div>
+          <p className="text-gray-400">
             {ChatbotLocalization.subtitle}
           </p>
         </div>
@@ -59,14 +72,14 @@ export const ChatMessageList = memo(function ChatMessageList({
             <ChatMessage key={message.id} message={message} />
           ))}
         {isStreaming && !hasContent && (
-          <div className="flex items-center gap-3 text-gray-500 dark:text-gray-400">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-sm font-medium dark:bg-gray-700">
+          <div className="flex items-center gap-3 text-gray-400">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-700 text-sm font-medium text-gray-200">
               AI
             </div>
             <div className="flex items-center gap-1">
-              <span className="h-2 w-2 animate-bounce rounded-full bg-gray-500 [animation-delay:-0.3s]"></span>
-              <span className="h-2 w-2 animate-bounce rounded-full bg-gray-500 [animation-delay:-0.15s]"></span>
-              <span className="h-2 w-2 animate-bounce rounded-full bg-gray-500"></span>
+              <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:-0.3s]"></span>
+              <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:-0.15s]"></span>
+              <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400"></span>
             </div>
             <span className="text-sm">{ChatbotLocalization.loadingMessage}</span>
           </div>

@@ -94,7 +94,6 @@ export default function Sportsbook() {
 
       <SportsbookChatDrawer
         isOpen={isChatOpen}
-        openLabel={SportsbookLocalization.openChatLabel}
         closeLabel={SportsbookLocalization.closeChatLabel}
         onToggle={handleToggleChat}
       />

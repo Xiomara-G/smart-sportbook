@@ -1,6 +1,6 @@
 export const ChatbotLocalization = {
-  title: 'Soporte Lucky Casino',
-  subtitle: '¿En qué puedo ayudarte hoy?',
+  title: 'Asistente de Apuestas Deportivas',
+  subtitle: '¿En qué evento deportivo te ayudo hoy?',
   inputPlaceholder: 'Escribe tu mensaje...',
   sendButtonAriaLabel: 'Enviar mensaje',
   emptyStateMessage: 'Inicia una conversación escribiendo un mensaje abajo.',
@@ -18,9 +18,13 @@ export const ChatbotLocalization = {
     '❓ Usa las sugerencias rápidas para preguntas comunes',
   ],
   suggestions: [
-    '¿Cómo hago un depósito con mi tarjeta de crédito?',
-    'Mi retiro está tardando más de lo esperado',
-    '¿Cómo reclamo el bono de bienvenida?',
-    'El juego se congeló durante una partida',
+    '¿Qué partidos me recomiendas para hoy?',
+    '¿Cómo hago una apuesta combinada?',
+    'Explícame los tipos de apuestas deportivas',
+    '¿Cómo funciona el handicap en fútbol?',
+    'Quiero hacer mi primera apuesta deportiva',
+    '¿Qué es el over/under en apuestas?',
+    'Mi apuesta aparece suspendida',
+    '¿Cómo calculo las ganancias de una combinada?',
   ],
 } as const;

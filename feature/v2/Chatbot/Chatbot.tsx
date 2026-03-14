@@ -9,9 +9,8 @@ import { ChatInput } from './components/ChatInput';
 import { ChatSuggestions } from './components/ChatSuggestions';
 import { createUserMessage, createAssistantMessage } from './adapters/MessageAdapter';
 import { sendMessage } from './services/ChatbotService';
-import { ThemeToggle } from './components/ThemeToggle';
 
-const INITIAL_GREETING = "¡Hola! Soy Lucky, tu asistente de soporte. Estoy aquí para ayudarte. ¿En qué puedo asistirte hoy?";
+const INITIAL_GREETING = "¡Hola! Soy Lucky, tu asistente de apuestas deportivas. 🏆⚽\n\nTe ayudo con:\n• Hacer apuestas simples y combinadas\n• Explicarte todos los tipos de apuestas\n• Proponerte apuestas para los partidos de hoy\n• Resolver dudas sobre tus apuestas y cuotas\n\n¿En qué evento deportivo te gustaría apostar?";
 const STORAGE_KEY = 'chat_messages';
 
 interface ChatbotProps {
@@ -138,7 +137,7 @@ export default function Chatbot({ isEmbedded = false }: Readonly<ChatbotProps>) 
 
   return (
     <div
-      className={`relative flex flex-col bg-gray-50 dark:bg-gray-950 ${
+      className={`relative flex flex-col bg-gray-950 ${
         isEmbedded ? 'h-full' : 'h-screen'
       }`}
     >
@@ -149,11 +148,6 @@ export default function Chatbot({ isEmbedded = false }: Readonly<ChatbotProps>) 
         hasMessages={state.messages.length > 0}
       />
       <ChatInput onSendMessage={handleSendMessage} isLoading={state.isLoading} />
-      {!isEmbedded && (
-        <div className="absolute bottom-4 right-4 z-10">
-          <ThemeToggle />
-        </div>
-      )}
     </div>
   );
 }

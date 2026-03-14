@@ -1,10 +1,7 @@
 import { AGENT_IDENTITY, RESPONSE_RULES } from './Core/BaseRules';
 import { SUPPORT_AREAS, IMPORTANT_RULES, PROHIBITED_PHRASES, ADDITIONAL_CONTEXT } from './Core/SupportAreas';
-import { DEPOSIT_FLOW } from './Flows/DepositFlow';
-import { WITHDRAWAL_FLOW } from './Flows/WithdrawalFlow';
-import { BONUS_FLOW } from './Flows/BonusFlow';
-import { VERIFICATION_FLOW } from './Flows/VerificationFlow';
 import { SPORTS_BET_FLOW } from './Flows/SportsBetFlow';
+import { BETTING_ASSISTANT_FLOW } from './Flows/BettingAssistantFlow';
 
 export const CUSTOMER_SERVICE_AGENT_PROMPT = `${AGENT_IDENTITY}
 
@@ -12,15 +9,9 @@ ${RESPONSE_RULES}
 
 ${SUPPORT_AREAS}
 
-${DEPOSIT_FLOW}
-
-${WITHDRAWAL_FLOW}
-
-${BONUS_FLOW}
-
-${VERIFICATION_FLOW}
-
 ${SPORTS_BET_FLOW}
+
+${BETTING_ASSISTANT_FLOW}
 
 ${IMPORTANT_RULES}
 
@@ -38,9 +29,6 @@ export {
   IMPORTANT_RULES,
   PROHIBITED_PHRASES,
   ADDITIONAL_CONTEXT,
-  DEPOSIT_FLOW,
-  WITHDRAWAL_FLOW,
-  BONUS_FLOW,
-  VERIFICATION_FLOW,
   SPORTS_BET_FLOW,
+  BETTING_ASSISTANT_FLOW,
 };
