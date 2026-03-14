@@ -9,6 +9,14 @@ export const ChatbotLocalization = {
   retryButton: 'Reintentar',
   newChatButton: 'Nueva conversación',
   helperText: 'Presiona Enter para enviar, Shift + Enter para nueva línea',
+  helpTitle: 'Cómo usar el chat',
+  helpContent: [
+    '💬 Escribe tu pregunta y presiona Enter para enviar',
+    '🔄 Usa "Nueva conversación" para empezar un nuevo chat',
+    '🌙 Haz clic en el botón de la luna para modo oscuro',
+    '💾 Tu conversación se guarda automáticamente',
+    '❓ Usa las sugerencias rápidas para preguntas comunes',
+  ],
   suggestions: [
     '¿Cómo hago un depósito con mi tarjeta de crédito?',
     'Mi retiro está tardando más de lo esperado',
