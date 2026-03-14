@@ -29,26 +29,45 @@ export default function Chatbot() {
 
   const handleSendMessage = useCallback(async (content: string) => {
     const userMessage = createUserMessage(content);
+    const streamingMessage = createAssistantMessage('', true);
 
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, userMessage],
+      messages: [...prev.messages, userMessage, streamingMessage],
       isLoading: true,
       error: null,
     }));
 
     try {
-      const response = await sendMessage({ content });
+      await sendMessage({ content }, (chunk) => {
+        setState((prev) => ({
+          ...prev,
+          messages: prev.messages.map((msg, idx) =>
+            idx === prev.messages.length - 1
+              ? { ...msg, content: chunk }
+              : msg
+          ),
+        }));
+      });
 
       setState((prev) => ({
         ...prev,
-        messages: [...prev.messages, response.message],
         isLoading: false,
+        messages: prev.messages.map((msg, idx) =>
+          idx === prev.messages.length - 1
+            ? { ...msg, isStreaming: false }
+            : msg
+        ),
       }));
     } catch (error) {
       setState((prev) => ({
         ...prev,
         isLoading: false,
+        messages: prev.messages.map((msg, idx) =>
+          idx === prev.messages.length - 1
+            ? { ...msg, isStreaming: false, content: 'Lo siento, estoy teniendo problemas técnicos en este momento. Por favor, intenta nuevamente en unos momentos o contacta a soporte directamente.' }
+            : msg
+        ),
         error: 'Failed to send message',
       }));
     }
