@@ -2,20 +2,12 @@
 
 import React, { memo } from 'react';
 
-interface SportsbookHeaderBannersProps {
-  title: string;
-  description: string;
-}
-
-export const SportsbookHeaderBanners = memo(function SportsbookHeaderBanners({
-  title,
-  description,
-}: SportsbookHeaderBannersProps) {
+export const SportsbookHeaderBanners = memo(function SportsbookHeaderBanners() {
   return (
     <header className="px-6 py-6">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
         <section aria-label="Video promocional">
-          <div className="relative w-full overflow-hidden rounded-[2rem]">
+          <div className="relative w-full overflow-hidden rounded-4xl">
             <video
               className="h-64 w-full object-cover"
               autoPlay

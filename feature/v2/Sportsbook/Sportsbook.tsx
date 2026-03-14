@@ -52,10 +52,7 @@ export default function Sportsbook() {
       {/* Main Content */}
       <div className="flex flex-1 flex-col overflow-hidden lg:flex-row">
         <div className="flex flex-1 flex-col overflow-y-auto">
-          <SportsbookHeaderBanners
-            title={SportsbookLocalization.pageTitle}
-            description={SportsbookLocalization.pageDescription}
-          />
+          <SportsbookHeaderBanners />
           <SportsbookMatchList
             events={SportsbookLocalization.events}
             onAddBet={handleAddBet}
