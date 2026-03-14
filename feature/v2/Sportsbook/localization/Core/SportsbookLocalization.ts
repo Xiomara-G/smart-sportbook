@@ -32,7 +32,7 @@ export const SportsbookLocalization = {
       id: 'event-1',
       league: 'Premier League',
       homeTeam: 'Chelsea',
-      awayTeam: 'Newcastle United',
+      awayTeam: 'Barcelona',
       minute: "85'",
       marketOptions: [
         { id: '1', label: '1', odds: '2.10' },

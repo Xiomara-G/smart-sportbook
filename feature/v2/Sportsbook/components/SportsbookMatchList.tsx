@@ -26,10 +26,11 @@ export const SportsbookMatchList = memo(function SportsbookMatchList({
   };
 
   return (
-    <main className="flex-1 px-4 py-4 md:px-6">
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-4" aria-label="Eventos en vivo">
+ 
+    <main className="flex-1 px-4 py-4 md:px-6 ">
+      <section className="mx-auto flex w-full max-w-7xl flex-col gap-4 " aria-label="Eventos en vivo">
         {/* UEFA Champions League Banner Style */}
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#0d1f03] via-[#1a3301] to-[#0d1f03] p-4 md:p-8 border border-[#3B6C01]/20">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[url('/image.png')] bg-cover bg-center">
           <div className="relative z-10 text-center">
             <h2 className="text-[10px] md:text-sm font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">UEFA Champions League</h2>
             <div className="flex flex-col gap-3 md:gap-4">
