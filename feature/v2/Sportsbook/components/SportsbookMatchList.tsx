@@ -1,60 +1,107 @@
 'use client';
 
 import React, { memo } from 'react';
-import { SportsbookEvent } from '../interfaces/SportsbookInterfaces';
+import { SportsbookEvent, SportsbookMarketOption } from '../interfaces/SportsbookInterfaces';
+import { Bet } from '../Sportsbook';
 
 interface SportsbookMatchListProps {
   events: SportsbookEvent[];
-  addBetLabel: string;
-  onAddBet: () => void;
+  onAddBet: (bet: Bet) => void;
 }
 
 export const SportsbookMatchList = memo(function SportsbookMatchList({
   events,
-  addBetLabel,
   onAddBet,
 }: SportsbookMatchListProps) {
+  const handleAddBet = (event: SportsbookEvent, option: SportsbookMarketOption) => {
+    const bet: Bet = {
+      id: `${event.id}-${option.id}`,
+      eventId: event.id,
+      homeTeam: event.homeTeam,
+      awayTeam: event.awayTeam,
+      selection: `${event.homeTeam} vs ${event.awayTeam} - ${option.label}`,
+      odds: option.odds,
+    };
+    onAddBet(bet);
+  };
+
   return (
-    <main className="flex-1 overflow-y-auto bg-[#030a1a] px-4 py-4">
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-3" aria-label="Eventos en vivo">
-        {events.map((event) => (
-          <article
-            key={event.id}
-            className="rounded-xl border border-[#20407f] bg-[#0a1634] p-3 text-white"
-          >
-            <div className="mb-2 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-xs text-cyan-300">{event.league}</p>
-                <h2 className="text-sm font-semibold">
-                  {event.homeTeam} vs {event.awayTeam}
-                </h2>
-              </div>
-              <span className="rounded-full bg-red-600 px-2 py-1 text-xs font-bold">
-                EN VIVO {event.minute}
-              </span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-              {event.marketOptions.map((option) => (
-                <button
-                  key={`${event.id}-${option.id}`}
-                  className="rounded-md border border-[#2f5fba] bg-[#0b2454] px-3 py-2 text-left transition hover:border-cyan-400"
-                  onClick={onAddBet}
-                  type="button"
-                >
-                  <span className="block text-xs text-blue-200">{option.label}</span>
-                  <span className="block text-sm font-semibold">{option.odds}</span>
-                </button>
+    <main className="flex-1 px-4 py-4 md:px-6">
+      <section className="mx-auto flex w-full max-w-7xl flex-col gap-4" aria-label="Eventos en vivo">
+        {/* UEFA Champions League Banner Style */}
+        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#0d1f03] via-[#1a3301] to-[#0d1f03] p-4 md:p-8 border border-[#3B6C01]/20">
+          <div className="relative z-10 text-center">
+            <h2 className="text-[10px] md:text-sm font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">UEFA Champions League</h2>
+            <div className="flex flex-col gap-3 md:gap-4">
+              {events.slice(0, 3).map((event) => (
+                <div key={event.id} className="flex flex-wrap items-center justify-center gap-2 md:gap-8">
+                  <span className="min-w-[80px] md:w-32 text-center md:text-right text-xs md:text-base font-bold">{event.homeTeam}</span>
+                  <div className="flex gap-1 md:gap-2">
+                    <button
+                      onClick={() => handleAddBet(event, event.marketOptions[0])}
+                      className="rounded bg-[#81C00A] px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold text-black hover:bg-[#9ad00b] transition"
+                    >
+                      {event.marketOptions[0]?.odds || '2.31'}
+                    </button>
+                    <span className="text-[10px] md:text-xs font-bold text-gray-400 self-center">VS</span>
+                    <button
+                      onClick={() => handleAddBet(event, event.marketOptions[2] || event.marketOptions[0])}
+                      className="rounded bg-[#81C00A] px-2 md:px-3 py-1 text-[10px] md:text-xs font-bold text-black hover:bg-[#9ad00b] transition"
+                    >
+                      {event.marketOptions[2]?.odds || '2.31'}
+                    </button>
+                  </div>
+                  <span className="min-w-[80px] md:w-32 text-center md:text-left text-xs md:text-base font-bold">{event.awayTeam}</span>
+                </div>
               ))}
-              <button
-                className="rounded-md border border-cyan-500 bg-cyan-500/10 px-3 py-2 text-left text-sm font-semibold text-cyan-300 transition hover:bg-cyan-500/20"
-                onClick={onAddBet}
-                type="button"
-              >
-                {addBetLabel}
-              </button>
             </div>
-          </article>
-        ))}
+          </div>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 gap-4">
+          {events.map((event) => (
+            <article
+              key={event.id}
+              className="rounded-2xl border border-[#1a1a1a] bg-[#0d0d0d] p-4 transition hover:border-[#3B6C01]/50"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-[#81C00A] animate-pulse" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">{event.league}</span>
+                </div>
+                <span className="text-[10px] font-bold text-[#81C00A]">{event.minute}</span>
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-1">
+                  <h2 className="text-sm font-bold">{event.homeTeam}</h2>
+                  <h2 className="text-sm font-bold">{event.awayTeam}</h2>
+                </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  {event.marketOptions.map((option) => (
+                    <button
+                      key={`${event.id}-${option.id}`}
+                      className="flex flex-col items-center justify-center rounded-xl border border-[#1a1a1a] bg-[#121212] px-3 py-2 min-w-[50px] md:min-w-[60px] transition hover:border-[#81C00A] hover:bg-[#1a1a1a]"
+                      onClick={() => handleAddBet(event, option)}
+                      type="button"
+                    >
+                      <span className="text-[10px] text-gray-500">{option.label}</span>
+                      <span className="text-xs font-bold text-[#81C00A]">{option.odds}</span>
+                    </button>
+                  ))}
+                  <button
+                    className="rounded-xl border border-[#81C00A] bg-[#81C00A] px-4 py-2 text-xs font-bold text-black transition hover:bg-[#9ad00b]"
+                    onClick={() => handleAddBet(event, event.marketOptions[0])}
+                    type="button"
+                  >
+                    Apostar
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
   );

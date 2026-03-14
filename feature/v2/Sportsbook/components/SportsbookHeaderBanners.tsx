@@ -15,32 +15,44 @@ export const SportsbookHeaderBanners = memo(function SportsbookHeaderBanners({
   banners,
 }: SportsbookHeaderBannersProps) {
   return (
-    <header className="border-b border-gray-800 bg-[#07122b] px-4 py-4">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-white">{title}</h1>
-          <p className="text-sm text-blue-100">{description}</p>
-        </div>
+    <header className="px-6 py-6">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
         <section
-          className="grid grid-cols-1 gap-3 md:grid-cols-3"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
           aria-label="Promociones destacadas"
         >
-          {banners.map((banner) => (
+          {banners.map((banner, idx) => (
             <article
               key={banner.id}
-              className="rounded-xl border border-cyan-500/40 bg-[#0c1e43] p-4 text-white"
+              className={`relative overflow-hidden rounded-[2rem] p-6 text-white h-48 flex flex-col justify-end ${
+                idx === 0 
+                  ? 'bg-gradient-to-br from-[#1a4a1a] to-[#0d1f03] border border-[#3B6C01]/30' 
+                  : 'bg-[#121212] border border-[#1a1a1a]'
+              }`}
             >
-              <h2 className="text-sm font-semibold">{banner.title}</h2>
-              <p className="mt-1 text-xs text-blue-100">{banner.subtitle}</p>
-              <button
-                className="mt-3 rounded-md bg-cyan-500 px-3 py-2 text-xs font-semibold text-[#00112c] transition hover:bg-cyan-400"
-                type="button"
-              >
-                {banner.ctaLabel}
-              </button>
+              <div className="relative z-10">
+                <h2 className="text-xl font-bold leading-tight">{banner.title}</h2>
+                <p className="mt-1 text-xs text-gray-300">{banner.subtitle}</p>
+                <button
+                  className="mt-4 rounded-full bg-[#81C00A] px-4 py-2 text-xs font-bold text-black transition hover:bg-[#9ad00b]"
+                  type="button"
+                >
+                  {banner.ctaLabel}
+                </button>
+              </div>
+              {/* Decorative elements to mimic image style */}
+              <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full bg-[#81C00A]/10 blur-3xl" />
             </article>
           ))}
         </section>
+        
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-bold text-white">Top Live Events</h3>
+          <div className="flex gap-2">
+            <button className="h-8 w-8 rounded-lg bg-[#1a1a1a] text-xs">{'<'}</button>
+            <button className="h-8 w-8 rounded-lg bg-[#1a1a1a] text-xs">{'>'}</button>
+          </div>
+        </div>
       </div>
     </header>
   );
